@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Опитування про тур</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 20px; /* Відступ зверху */
+    padding: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .formu {
+    max-width: 600px;
+    background-color: #ffe6e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .survey {
+    margin-bottom: 60px;
+  }
+
+
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-container label {
+    margin-right: 10px;
+  }
+
+  .left {
+    margin-right: 10px; /* Горизонтальний відступ */
+  }
+
+  .right {
+    margin-left: auto;
+  }
+
+  .input[type="text"],
+  .input[type="number"],
+  .input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .button-submit {
+    display: block;
+    margin: 30px auto; /* Відступи зверху та знизу 20px, а зліва та справа автоматично вирівнюються */
+    background-color: #99c2eb;
+    color: white;
+    padding: 15px 70px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .button-submit:hover {
+    background-color: #99c2eb;
+  }
+
+  .center {
+    text-align: center; /* Центруємо текст заголовка */
+  }
+
+.checkbox-container {
+    margin-top: 10px; /* Відступ між рядками */
+  }
+  
+</style>
+</head>
+<body>
+<div class="formu">
+  <h1 class="center">Опитування про тур</h1>
+  <form id="surveyForm" class="survey">
+    <label for="name">Ваше ім'я:</label>
+    <input type="text" id="nameInput" name="name" maxlength="50" class="input">
+    
+    <label for="email">Ваша електронна адреса:</label>
+    <input type="email" id="emailInput" name="email" maxlength="50" class="input">
+    
+    <label for="city">Місто, яке ви відвідували:</label>
+    <select id="citySelect" name="city">
+      <option value="Одеса">Одеса</option>
+      <option value="Львів">Львів</option>
+      <option value="Ужгород">Ужгород</option>
+      <option value="Харків">Харків</option>
+      <option value="Дніпро">Дніпро</option>
+      <option value="Миколаїв">Миколаїв</option>
+      <option value="Київ">Київ</option>
+    </select>
+    
+    <label for="duration">Тривалість туру (у днях):</label>
+    <input type="number" id="durationInput" name="duration" min="1" max="21" class="input">
+    
+    <label for="budget">Вартість туру (в гривнях):</label>
+    <input type="number" id="budgetInput" name="budget" min="0" class="input">
+    
+    <label for="interests">Що найбільше запам'яталося під час подорожі:</label>
+    <textarea id="interestsTextarea" name="interests" rows="5" cols="50"></textarea>
+    
+    <label for="transport">Яки ви оцінюєте організацію туру (від 1 до 10):</label>
+    <input type="number" id="durationInput" name="duration" min="1" max="10" class="input">
+    
+    <label for="accommodation">Тип проживання, який ви обрали:</label>
+    <select id="accommodationInput" name="accommodation" class="input">
+      <option value="hotel">Готель</option>
+      <option value="hostel">Хостел</option>
+      <option value="self_catering">Самопоселення</option>
+      <option value="apartments">Апартаменти</option>
+    </select>
+
+    <label for="food">Ваші уподобання в їжі під час подорожі:</label>
+    <textarea id="foodTextarea" name="food" rows="5" cols="50"></textarea>
+    
+    <label for="activities">Які активності ви випробували під час туру:</label>
+    <textarea id="activitiesTextarea" name="activities" rows="5" cols="50"></textarea>
+    
+    <label for="souvenirs">Чи купили ви сувеніри під час подорожі:</label>
+    <div class="checkbox-container">
+      <input type="checkbox" id="souvenirsCheckbox" name="souvenirs" value="yes">
+      <label for="souvenirsCheckbox">Так</label>
+      <input type="checkbox" id="noSouvenirsCheckbox" name="souvenirs" value="no">
+      <label for="noSouvenirsCheckbox">Ні</label>
+    </div>
+
+<label for="agency">Чи будете ще користуватись послугами нашої агенції:</label>
+    <div class="checkbox-container">
+      <input type="checkbox" id="agencyYesCheckbox" name="agency" value="yes">
+      <label for="agencyYesCheckbox">Так</label>
+      <input type="checkbox" id="agencyNoCheckbox" name="agency" value="no">
+      <label for="agencyNoCheckbox">Ні</label>
+    </div>
+  
+    <input type="submit" id="submitButton" class="button-submit" value="Відправити">
+  </form>
+
+  <h2 class="center">Збережені відповіді</h2>
+  <div id="savedSurveys" class="responses"></div>
+
+  <h2 class="center">Фільтри</h2>
+  <div class="filters">
+    <button id="filterOdessa" class="button-submit">Учасники, які їздили в Одесу</button>
+    <button id="filterFiveDays" class="button-submit">Учасники, які були в турі 10 днів</button>
+    <button id="filterHotel" class="button-submit">Учасники, які поселились в готель</button>
+  </div>
+
+  <h2 class="center">Результати фільтрації</h2>
+  <div id="filteredResults" class="responses"></div>
+</div>
+
+<script>
+  // Ініціалізуємо масив опитувань
+  let surveys = [];
+
+  // Завантажуємо дані опитувань з localStorage при завантаженні сторінки
+  window.addEventListener('load', function() {
+    const savedSurveys = JSON.parse(localStorage.getItem('surveys'));
+    if (savedSurveys) {
+      surveys = savedSurveys;
+    }
+    displaySurveys();
+  });
+
+  // Забезпечуємо збереження даних опитування в localStorage при відправці форми
+  document.getElementById('surveyForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Передбачаємо відправку форми
+
+    // Збираємо дані форми
+    const formData = new FormData(this);
+
+    // Конвертуємо formData в об'єкт
+    const survey = {};
+    formData.forEach((value, key) => {
+      survey[key] = value;
+    });
+
+    // Додаємо дані опитування до масиву опитувань
+    surveys.push(survey);
+
+    // Зберігаємо оновлений масив опитувань в localStorage
+    localStorage.setItem('surveys', JSON.stringify(surveys));
+
+    // Очищаємо форму для наступного введення
+    this.reset();
+
+    // Оновлюємо відображення збережених відповідей
+    displaySurveys();
+
+    // Optional: Display a message to the user
+    alert('Дякуємо за ваші відповіді!');
+  });
+
+  // Відображаємо збережені опитування
+  function displaySurveys() {
+    const savedSurveysDiv = document.getElementById('savedSurveys');
+    savedSurveysDiv.innerHTML = ''; // Очистити попередній контент
+    surveys.forEach((survey, index) => {
+      const surveyDiv = document.createElement('div');
+      surveyDiv.classList.add('survey-response');
+      surveyDiv.innerHTML = `
+        <h3>Відповідь ${index + 1}</h3>
+        <p><strong>Ім'я:</strong> ${survey.name}</p>
+        <p><strong>Електронна адреса:</strong> ${survey.email}</p>
+        <p><strong>Місто:</strong> ${survey.city}</p>
+        <p><strong>Тривалість туру:</strong> ${survey.duration} днів</p>
+        <p><strong>Вартість туру:</strong> ${survey.budget} грн</p>
+        <p><strong>Найбільше запам'яталося:</strong> ${survey.interests}</p>
+        <p><strong>Оцінка організації туру:</strong> ${survey.rating}</p>
+        <p><strong>Тип проживання:</strong> ${survey.accommodation}</p>
+        <p><strong>Уподобання в їжі:</strong> ${survey.food}</p>
+        <p><strong>Активності:</strong> ${survey.activities}</p>
+        <p><strong>Купівля сувенірів:</strong> ${survey.souvenirs}</p>
+        <p><strong>Послуги агенції:</strong> ${survey.agency}</p>
+      `;
+      savedSurveysDiv.appendChild(surveyDiv);
+    });
+  }
+
+  // Функції фільтрації
+  function filterSurveys(criteria) {
+    let filteredSurveys = surveys.filter(criteria);
+    displayFilteredSurveys(filteredSurveys);
+  }
+
+  function displayFilteredSurveys(filteredSurveys) {
+    const filteredResultsDiv = document.getElementById('filteredResults');
+    filteredResultsDiv.innerHTML = ''; // Очистити попередній контент
+    filteredSurveys.forEach((survey, index) => {
+      const surveyDiv = document.createElement('div');
+      surveyDiv.classList.add('survey-response');
+      surveyDiv.innerHTML = `
+        <h3>Відповідь ${index + 1}</h3>
+        <p><strong>Ім'я:</strong> ${survey.name}</p>
+        <p><strong>Місто:</strong> ${survey.city}</p>
+        <p><strong>Тривалість туру:</strong> ${survey.duration} днів</p>
+        <p><strong>Вартість туру:</strong> ${survey.budget} грн</p>
+        <p><strong>Тип проживання:</strong> ${survey.accommodation}</p>
+      `;
+      filteredResultsDiv.appendChild(surveyDiv);
+    });
+  }
+
+  // Події для кнопок фільтрації
+  document.getElementById('filterOdessa').addEventListener('click', function() {
+    filterSurveys(survey => survey.city === 'Одеса');
+  });
+
+  document.getElementById('filterFiveDays').addEventListener('click', function() {
+    filterSurveys(survey => survey.duration === '10');
+  });
+
+  document.getElementById('filterHotel').addEventListener('click', function() {
+    filterSurveys(survey => survey.accommodation === 'hotel');
+  });
+</script>
+</body>
+</html>
